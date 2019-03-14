@@ -6,7 +6,7 @@ library(tidyverse)
 
 # Read acc_metrics.csv file -----------------------------------------------
 
-acc_data <- read_csv(here("data", "acc_data.csv"))
+hip_acc_data <- read_csv(here("data", "acc_data.csv"))
 
 # Read Database.xlsx file -------------------------------------------------
 
@@ -56,7 +56,7 @@ cardio_data$VO2_kg    <- as.double(cardio_data$VO2_kg)
 
 # Filter due to cardio_data having a greater number of subjects
 cardio_data <- filter(
-  cardio_data, ID %in% acc_data$ID
+  cardio_data, ID %in% hip_acc_data$ID
 ) 
 
 if (file.exists(here("data", "cardio_data.csv")) == FALSE) {
@@ -79,7 +79,7 @@ sample_desc <- select(
 
 # Filter due to sample_desc having a greater number of subjects
 sample_desc <- filter(
-  sample_desc, ID %in% acc_data$ID
+  sample_desc, ID %in% hip_acc_data$ID
 ) 
 
 # Get BMI
@@ -90,8 +90,9 @@ for (i in 1:nrow(sample_desc)) {
 
 sample_desc <- select(sample_desc,
                       ID, eval, height, weight, BMI, body_fat,
-                      sex, age, surgery_type)
+                      sex, age, surgery_type) %>% 
+  distinct(ID, .keep_all = TRUE)
 
-if (file.exists(here("data", "sample_descriptives.csv")) == FALSE) {
-  write_csv(sample_descriptives, here("data", "sample_descriptives.csv"))
+if (file.exists(here("data", "sample_desc.csv")) == FALSE) {
+  write_csv(sample_desc, here("data", "sample_desc.csv"))
 }
