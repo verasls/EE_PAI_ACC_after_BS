@@ -96,3 +96,14 @@ sample_desc <- select(sample_desc,
 if (file.exists(here("data", "sample_desc.csv")) == FALSE) {
   write_csv(sample_desc, here("data", "sample_desc.csv"))
 }
+
+# Merge data frames -------------------------------------------------------
+
+hip <- inner_join(
+  hip_acc_data, cardio_data, by = c("ID", "eval", "speed")
+) %>% 
+  inner_join(sample_desc, by = c("ID", "eval")) %>% 
+  select(
+   ID, eval, speed, counts, ENMO, MAD, 
+   V_O2, V_CO2, VO2_kg, weight, BMI 
+  )
