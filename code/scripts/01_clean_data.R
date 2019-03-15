@@ -73,7 +73,7 @@ sample_desc <- select(
   ID,
   eval = Evaluation,
   height = height_cm,
-  weight = weight_kg,
+  body_mass = weight_kg,
   body_fat,
   sex,
   age,
@@ -88,11 +88,11 @@ sample_desc <- filter(
 # Get BMI
 for (i in 1:nrow(sample_desc)) {
   sample_desc$BMI[i] <- 
-    sample_desc$weight[i] / ((sample_desc$height[i] / 100)^2)
+    sample_desc$body_mass[i] / ((sample_desc$height[i] / 100)^2)
 }
 
 sample_desc <- select(sample_desc,
-                      ID, eval, height, weight, BMI, body_fat,
+                      ID, eval, height, body_mass, BMI, body_fat,
                       sex, age, surgery_type) %>% 
   distinct(ID, .keep_all = TRUE)
 
@@ -107,8 +107,8 @@ hip <- inner_join(
 ) %>% 
   inner_join(sample_desc, by = c("ID", "eval")) %>% 
   select(
-   ID, eval, speed, counts, ENMO, MAD, 
-   V_O2, V_CO2, VO2_kg, weight, BMI 
+   ID, eval, speed, AC = counts, ENMO, MAD, 
+   V_O2, V_CO2, VO2_kg, body_mass, BMI 
   )
 
 # Compute other variables -------------------------------------------------
