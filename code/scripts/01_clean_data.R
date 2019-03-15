@@ -47,7 +47,9 @@ cardio_data <- select(
   V_CO2 = "V'CO2",
   RER,
   VO2_kg = "VO2/kg"
-)
+) %>% 
+  mutate(speed = round(speed, 0)) %>% 
+  filter(speed != 8)
 
 cardio_data$elevation <- as.double(cardio_data$elevation)
 cardio_data$HR        <- as.double(cardio_data$HR)
@@ -102,7 +104,7 @@ if (file.exists(here("data", "sample_desc.csv")) == FALSE) {
 
 # Merge data frames -------------------------------------------------------
 
-hip <- inner_join(
+hip <- right_join(
   hip_acc_data, cardio_data, by = c("ID", "eval", "speed")
 ) %>% 
   inner_join(sample_desc, by = c("ID", "eval")) %>% 
