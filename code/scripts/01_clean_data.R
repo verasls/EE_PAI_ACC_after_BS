@@ -1,8 +1,11 @@
-# Load packages -----------------------------------------------------------
+# Load packages and functions ---------------------------------------------
 
 library(here)
 library(readxl)
 library(tidyverse)
+source(here("code", "functions", "get_kcal.R"))
+source(here("code", "functions", "get_MET.R"))
+source(here("code", "functions", "get_PAI_categories.R"))
 
 # Read acc_metrics.csv file -----------------------------------------------
 
@@ -107,3 +110,18 @@ hip <- inner_join(
    ID, eval, speed, counts, ENMO, MAD, 
    V_O2, V_CO2, VO2_kg, weight, BMI 
   )
+
+# Compute other variables -------------------------------------------------
+
+# Compute kcal values
+hip <- do.call(rbind, (lapply(unique(hip$ID), get_kcal, df = hip)))
+# Compute MET values
+hip <- do.call(rbind, (lapply(unique(hip$ID), get_MET, df = hip)))
+# Get PAI categories by MET
+hip <- get_PAI_categories(hip)
+
+hip$SED_CAT_by_MET    <- as.factor(hip$SED_CAT_by_MET)
+hip$LIG_CAT_by_MET    <- as.factor(hip$LIG_CAT_by_MET)
+hip$MOD_CAT_by_MET    <- as.factor(hip$MOD_CAT_by_MET)
+hip$VIG_CAT_by_MET    <- as.factor(hip$VIG_CAT_by_MET)
+hip$INTENS_CAT_by_MET <- as.factor(hip$INTENS_CAT_by_MET)
