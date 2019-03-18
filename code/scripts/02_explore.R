@@ -45,3 +45,38 @@ cardio_acc_descriptives <- hip %>%
 
 # Plots -------------------------------------------------------------------
 
+# Scatter plots kcal X acc metric
+kcal_AC_scatter <- ggplot(hip) +
+  geom_point(aes(x = kcal, y = AC))
+
+kcal_ENMO_scatter <- ggplot(hip) +
+  geom_point(aes(x = kcal, y = ENMO))
+
+kcal_MAD_scatter <- ggplot(hip) +
+  geom_point(aes(x = kcal, y = MAD))
+
+# Smooth line plots kcal X acc metric
+kcal_AC_smooth <- ggplot(hip) +
+  geom_smooth(aes(x = kcal, y = AC))
+
+kcal_ENMO_smooth <- ggplot(hip) +
+  geom_smooth(aes(x = kcal, y = ENMO))
+
+kcal_MAD_smooth <- ggplot(hip) +
+  geom_smooth(aes(x = kcal, y = MAD))
+
+# Scatter plots MET X acc metric
+MET_AC_scatter <- ggplot(hip) +
+  geom_point(aes(x = MET, y = AC)) +
+  scale_x_continuous(breaks = c(1.5, 3, 6)) +
+  theme(panel.grid.major.x = element_line(color = "red"))
+
+MET_ENMO_scatter <- ggplot(hip) +
+  geom_point(aes(x = MET, y = ENMO)) +
+  scale_x_continuous(breaks = c(1.5, 3, 6)) +
+  theme(panel.grid.major.x = element_line(color = "red"))
+
+MET_MAD_scatter <- ggplot(hip) +
+  geom_point(aes(x = MET, y = MAD)) +
+  scale_x_continuous(breaks = c(1.5, 3, 6)) +
+  theme(panel.grid.major.x = element_line(color = "red"))
