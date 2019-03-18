@@ -104,7 +104,7 @@ if (file.exists(here("data", "sample_desc.csv")) == FALSE) {
 
 # Merge data frames -------------------------------------------------------
 
-hip <- right_join(
+hip <- inner_join(
   hip_acc_data, cardio_data, by = c("ID", "eval", "speed")
 ) %>% 
   inner_join(sample_desc, by = c("ID", "eval")) %>% 
