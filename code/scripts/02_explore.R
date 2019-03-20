@@ -1,10 +1,10 @@
 # Load packages and functions ---------------------------------------------
 
 library(here)
-source(here("code", "scripts", "01_clean_data.R")) # Loads cleaned data
-
 library(tidyverse)
 library(broman)
+
+source(here("code", "scripts", "01_clean_data.R")) # Loads cleaned data
 
 # Sample descriptives -----------------------------------------------------
 
@@ -81,3 +81,11 @@ MET_MAD_scatter <- ggplot(hip) +
   geom_point(aes(x = MET, y = MAD, colour = eval)) +
   scale_x_continuous(breaks = c(1.5, 3, 6)) +
   theme(panel.grid.major.x = element_line(color = "red"))
+
+# kcal X speed
+kcal_X_speed <- ggplot(data = hip, aes(x = speed, y = kcal, colour = eval)) +
+  stat_summary(fun.y = mean, geom = "point", size = 2, position = position_dodge(0.3)) +
+  stat_summary(fun.y = mean, geom = "line", position = position_dodge(0.3)) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", width = 0.4, position = position_dodge(0.3)) +
+  scale_x_continuous(breaks = seq(0, 7, 1)) +
+  scale_y_continuous(breaks = seq(1, 13.5, 1.5))
