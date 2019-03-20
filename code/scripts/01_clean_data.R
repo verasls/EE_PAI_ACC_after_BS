@@ -127,3 +127,5 @@ hip$LIG_CAT_by_MET    <- as.factor(hip$LIG_CAT_by_MET)
 hip$MOD_CAT_by_MET    <- as.factor(hip$MOD_CAT_by_MET)
 hip$VIG_CAT_by_MET    <- as.factor(hip$VIG_CAT_by_MET)
 hip$INTENS_CAT_by_MET <- as.factor(hip$INTENS_CAT_by_MET)
+
+hip$eval <- as.factor(hip$eval)
