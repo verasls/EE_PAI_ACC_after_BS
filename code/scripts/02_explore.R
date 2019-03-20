@@ -1,5 +1,6 @@
 # Load packages and functions ---------------------------------------------
 
+library(here)
 source(here("code", "scripts", "01_clean_data.R")) # Loads cleaned data
 
 library(tidyverse)
@@ -47,13 +48,13 @@ cardio_acc_descriptives <- hip %>%
 
 # Scatter plots kcal X acc metric
 kcal_AC_scatter <- ggplot(hip) +
-  geom_point(aes(x = kcal, y = AC))
+  geom_point(aes(x = kcal, y = AC, colour = eval))
 
 kcal_ENMO_scatter <- ggplot(hip) +
-  geom_point(aes(x = kcal, y = ENMO))
+  geom_point(aes(x = kcal, y = ENMO, colour = eval))
 
 kcal_MAD_scatter <- ggplot(hip) +
-  geom_point(aes(x = kcal, y = MAD))
+  geom_point(aes(x = kcal, y = MAD, colour = eval))
 
 # Smooth line plots kcal X acc metric
 kcal_AC_smooth <- ggplot(hip) +
@@ -67,16 +68,16 @@ kcal_MAD_smooth <- ggplot(hip) +
 
 # Scatter plots MET X acc metric
 MET_AC_scatter <- ggplot(hip) +
-  geom_point(aes(x = MET, y = AC)) +
+  geom_point(aes(x = MET, y = AC, colour = eval)) +
   scale_x_continuous(breaks = c(1.5, 3, 6)) +
   theme(panel.grid.major.x = element_line(color = "red"))
 
 MET_ENMO_scatter <- ggplot(hip) +
-  geom_point(aes(x = MET, y = ENMO)) +
+  geom_point(aes(x = MET, y = ENMO, colour = eval)) +
   scale_x_continuous(breaks = c(1.5, 3, 6)) +
   theme(panel.grid.major.x = element_line(color = "red"))
 
 MET_MAD_scatter <- ggplot(hip) +
-  geom_point(aes(x = MET, y = MAD)) +
+  geom_point(aes(x = MET, y = MAD, colour = eval)) +
   scale_x_continuous(breaks = c(1.5, 3, 6)) +
   theme(panel.grid.major.x = element_line(color = "red"))
