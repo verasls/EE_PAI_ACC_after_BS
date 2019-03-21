@@ -4,7 +4,7 @@ library(here)
 library(tidyverse)
 library(irr)
 
-source(here("code", "scripts", "03_ROC_curves.R")) # Loads ROC curves
+source(here("code", "scripts", "03_create_ROC_curves.R")) # Loads ROC curves
 source(here("code", "functions", "cross_validate_ROC_curves.R"))
 source(here("code", "functions", "percent_agreement.R"))
 

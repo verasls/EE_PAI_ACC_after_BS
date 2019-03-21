@@ -3,7 +3,7 @@
 library(here)
 library(tidyverse)
 
-source(here("code", "scripts", "04_ROC_validity_analysis.R")) # Loads ROC curves
+source(here("code", "scripts", "04_analyse_ROC_validity.R")) # Loads ROC curves
 source(here("code", "functions", "classify_PAI.R"))
 
 # 1 month after surgery analysis ------------------------------------------
