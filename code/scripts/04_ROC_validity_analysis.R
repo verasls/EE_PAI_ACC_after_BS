@@ -6,6 +6,7 @@ library(irr)
 
 source(here("code", "scripts", "03_ROC_curves.R")) # Loads ROC curves
 source(here("code", "functions", "cross_validate_ROC_curves.R"))
+source(here("code", "functions", "percent_agreement.R"))
 
 # Leave-one-out cross-validation ------------------------------------------
 
@@ -166,3 +167,38 @@ kappa_MAD_MOD_6m  <- kappa2(select(LOOCV_MAD_ROC_6m, MOD_CAT_by_MET, MOD_CAT_by_
 kappa_MAD_VIG_6m  <- kappa2(select(LOOCV_MAD_ROC_6m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
 kappa_MAD_glob_6m <- kappa2(select(LOOCV_MAD_ROC_6m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                             weight = "squared")
+
+# Percent agreement -------------------------------------------------------
+
+# 1 month after surgery
+
+## AC
+perc_agree_AC_ROC_1m <- percent_agreement(LOOCV_AC_ROC_1m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+## ENMO
+perc_agree_ENMO_ROC_1m <- percent_agreement(LOOCV_ENMO_ROC_1m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+## MAD
+perc_agree_MAD_ROC_1m <- percent_agreement(LOOCV_MAD_ROC_1m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+# 6 months after surgery
+
+## AC
+perc_agree_AC_ROC_6m <- percent_agreement(LOOCV_AC_ROC_6m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+## ENMO
+perc_agree_ENMO_ROC_6m <- percent_agreement(LOOCV_ENMO_ROC_6m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+## MAD
+perc_agree_MAD_ROC_6m <- percent_agreement(LOOCV_MAD_ROC_6m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+# 12 months after surgery
+
+## AC
+perc_agree_AC_ROC_12m <- percent_agreement(LOOCV_AC_ROC_12m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+## ENMO
+perc_agree_ENMO_ROC_12m <- percent_agreement(LOOCV_ENMO_ROC_12m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
+
+## MAD
+perc_agree_MAD_ROC_12m <- percent_agreement(LOOCV_MAD_ROC_12m, "INTENS_CAT_by_MET", "INTENS_CAT_by_ROC")
