@@ -122,10 +122,4 @@ hip <- do.call(rbind, (lapply(unique(hip$ID), get_MET, df = hip)))
 # Get PAI categories by MET
 hip <- get_PAI_categories(hip)
 
-hip$SED_CAT_by_MET    <- as.factor(hip$SED_CAT_by_MET)
-hip$LIG_CAT_by_MET    <- as.factor(hip$LIG_CAT_by_MET)
-hip$MOD_CAT_by_MET    <- as.factor(hip$MOD_CAT_by_MET)
-hip$VIG_CAT_by_MET    <- as.factor(hip$VIG_CAT_by_MET)
-hip$INTENS_CAT_by_MET <- as.factor(hip$INTENS_CAT_by_MET)
-
 hip$eval <- as.factor(hip$eval)
