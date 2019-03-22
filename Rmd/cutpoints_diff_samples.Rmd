@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: 
   html_document:
     toc: true
-    number_sections: true
+    number_sections: false
     toc_float: 
       collapsed: false
     theme: flatly
@@ -21,6 +21,8 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```{r load_packs}
 library(here)
 library(tidyverse)
+library(knitr)
+library(broman)
 ```
 
 
@@ -32,13 +34,13 @@ source(here("code", "scripts", "01_clean_data.R"))
 
 ```{r sample_message}
 if (sample == 1) {
-  message <- "participants who have been evaluated on at least 2 of the 3 evaluations (2nd, 3rd, 4th)"
+  message <- "participants who have been evaluated on at least 2 of the 3 time-points (1, 6 and 12 months after surgery)"
 } else {
   if (sample == 2) {
-    message <- "participants who have been evaluated on the 3 eval (2nd, 3rd and 4th), with training sessions attendance <= 50%"
+    message <- "participants who have been evaluated on the 3 time-points (1, 6 and 12 months after surgery), with training sessions attendance <= 50%"
   } else {
     if (sample == 3) {
-      message <- "participants who have been evaluated on the 3 eval (2nd, 3rd and 4th), no matter training sessions attendance"
+      message <- "participants who have been evaluated on the 3 time-points (1, 6 and 12 months after surgery), no matter training sessions attendance"
     }
   }
 }
@@ -51,7 +53,7 @@ n <- hip %>%
   )
 ```
 
-The selected sample is all `r message`. The number of participants for the 2nd, 3rd and 4th evaluations is `r n[1, 2]`, `r n[2, 2]` and `r n[3, 2]`, respectively.
+The selected sample was all `r message`. The number of participants for the 1, 6 and 12 months after surgery evaluations was `r n[1, 2]`, `r n[2, 2]` and `r n[3, 2]`, respectively.
 
 Descriptive statistics for cardiorespiratory and accelerometry variables, separated by speed is show below, where `speed 0` is sitting rest, `speed 1` is standing rest, and the remaining `speed` values is the walking speed in km^.^h^-1^.
 
@@ -60,12 +62,12 @@ source(here("code", "scripts", "02_explore.R"))
 ```
 
 ```{r cardio_acc_desc}
-knitr::kable(
+kable(
   cardio_acc_descriptives,
   col.names = c(
     "speed", "n",
     "kcal (mean)", "kcal (SD)",
-    "VO[2] (mean)", "VO[2] (SD)",
+    "VO~2~ (mean)", "VO~2~ (SD)",
     "MET (mean)", "MET (SD)",
     "AC (mean)", "AC (SD)",
     "ENMO (mean)", "ENMO (SD)",
@@ -74,5 +76,123 @@ knitr::kable(
   )
 ```
 
+AC, activity counts; ENMO, euclidean norm minus one; kcal, kilocalories; MAD, mean amplitude deviation; MET, metabolic equivalent; VO~2~, oxygen consumption.
+
 # ROC curves
+
+Cut-points for 1, 6 or 12 months after surgery that identify sedentary activity (SA) and physical activity intensities (PAI) created from AC, ENMO and MAD were obtained applying receiver operating characteristic curves (ROC). The indices used to summarize the cut-points were sensitivity (proportion of true positives that are correctly identified), specificity (proportion of false positive that are correctly identified) and the area under the curve.
+
+```{r ROC}
+source(here("code", "scripts", "03_create_ROC_curves.R"))
+```
+
+## 1 month after surgery
+
+```{r ROC_1m}
+ROC_summary_1m <- data.frame(
+  acc_metric = c(rep("AC", 3), rep("ENMO", 3), rep("MAD", 3)),
+  intensity = rep(c("Sedentary", "Moderate", "Vigorous"), 3),
+  threshold = c(
+    round(cp_AC_ROC_SED_1m[[1]], 0), round(cp_AC_ROC_MOD_1m[[1]], 0), round(cp_AC_ROC_VIG_1m[[1]], 0),
+    round(cp_ENMO_ROC_SED_1m[[1]], 0), round(cp_ENMO_ROC_MOD_1m[[1]], 0), round(cp_ENMO_ROC_VIG_1m[[1]], 0),
+    round(cp_MAD_ROC_SED_1m[[1]], 0), round(cp_MAD_ROC_MOD_1m[[1]], 0), round(cp_MAD_ROC_VIG_1m[[1]], 0)
+  ),
+  sensitivity = c(
+    myround(cp_AC_ROC_SED_1m[[3]], 2), myround(cp_AC_ROC_MOD_1m[[3]], 2), myround(cp_AC_ROC_VIG_1m[[3]], 2),
+    myround(cp_ENMO_ROC_SED_1m[[3]], 2), myround(cp_ENMO_ROC_MOD_1m[[3]], 2), myround(cp_ENMO_ROC_VIG_1m[[3]], 2),
+    myround(cp_MAD_ROC_SED_1m[[3]], 2), myround(cp_MAD_ROC_MOD_1m[[3]], 2), myround(cp_MAD_ROC_VIG_1m[[3]], 2)
+  ),
+  specificity = c(
+    myround(cp_AC_ROC_SED_1m[[2]], 2), myround(cp_AC_ROC_MOD_1m[[2]], 2), myround(cp_AC_ROC_VIG_1m[[2]], 2),
+    myround(cp_ENMO_ROC_SED_1m[[2]], 2), myround(cp_ENMO_ROC_MOD_1m[[2]], 2), myround(cp_ENMO_ROC_VIG_1m[[2]], 2),
+    myround(cp_MAD_ROC_SED_1m[[2]], 2), myround(cp_MAD_ROC_MOD_1m[[2]], 2), myround(cp_MAD_ROC_VIG_1m[[2]], 2)
+  ),
+  AUC = c(
+    myround(auc(AC_ROC_SED_1m)[[1]], 2), myround(auc(AC_ROC_MOD_1m)[[1]], 2), myround(auc(AC_ROC_VIG_1m)[[1]], 2),
+    myround(auc(ENMO_ROC_SED_1m)[[1]], 2), myround(auc(ENMO_ROC_MOD_1m)[[1]], 2), myround(auc(ENMO_ROC_VIG_1m)[[1]], 2),
+    myround(auc(MAD_ROC_SED_1m)[[1]], 2), myround(auc(MAD_ROC_MOD_1m)[[1]], 2), myround(auc(MAD_ROC_VIG_1m)[[1]], 2)
+  )
+)
+kable(
+  ROC_summary_1m, 
+  align = c("l", "l", "r", "r", "r", "r"), 
+  col.names = c(
+    "Accelerometer Metric", "Intensity Category", "Threshold", "Sensitivity", "Specificity", "AUC"
+    )
+  )
+```
+
+## 6 months after surgery
+
+```{r ROC_6m}
+ROC_summary_6m <- data.frame(
+  acc_metric = c(rep("AC", 3), rep("ENMO", 3), rep("MAD", 3)),
+  intensity = rep(c("Sedentary", "Moderate", "Vigorous"), 3),
+  threshold = c(
+    round(cp_AC_ROC_SED_6m[[1]], 0), round(cp_AC_ROC_MOD_6m[[1]], 0), round(cp_AC_ROC_VIG_6m[[1]], 0),
+    round(cp_ENMO_ROC_SED_6m[[1]], 0), round(cp_ENMO_ROC_MOD_6m[[1]], 0), round(cp_ENMO_ROC_VIG_6m[[1]], 0),
+    round(cp_MAD_ROC_SED_6m[[1]], 0), round(cp_MAD_ROC_MOD_6m[[1]], 0), round(cp_MAD_ROC_VIG_6m[[1]], 0)
+  ),
+  sensitivity = c(
+    myround(cp_AC_ROC_SED_6m[[3]], 2), myround(cp_AC_ROC_MOD_6m[[3]], 2), myround(cp_AC_ROC_VIG_6m[[3]], 2),
+    myround(cp_ENMO_ROC_SED_6m[[3]], 2), myround(cp_ENMO_ROC_MOD_6m[[3]], 2), myround(cp_ENMO_ROC_VIG_6m[[3]], 2),
+    myround(cp_MAD_ROC_SED_6m[[3]], 2), myround(cp_MAD_ROC_MOD_6m[[3]], 2), myround(cp_MAD_ROC_VIG_6m[[3]], 2)
+  ),
+  specificity = c(
+    myround(cp_AC_ROC_SED_6m[[2]], 2), myround(cp_AC_ROC_MOD_6m[[2]], 2), myround(cp_AC_ROC_VIG_6m[[2]], 2),
+    myround(cp_ENMO_ROC_SED_6m[[2]], 2), myround(cp_ENMO_ROC_MOD_6m[[2]], 2), myround(cp_ENMO_ROC_VIG_6m[[2]], 2),
+    myround(cp_MAD_ROC_SED_6m[[2]], 2), myround(cp_MAD_ROC_MOD_6m[[2]], 2), myround(cp_MAD_ROC_VIG_6m[[2]], 2)
+  ),
+  AUC = c(
+    myround(auc(AC_ROC_SED_6m)[[1]], 2), myround(auc(AC_ROC_MOD_6m)[[1]], 2), myround(auc(AC_ROC_VIG_6m)[[1]], 2),
+    myround(auc(ENMO_ROC_SED_6m)[[1]], 2), myround(auc(ENMO_ROC_MOD_6m)[[1]], 2), myround(auc(ENMO_ROC_VIG_6m)[[1]], 2),
+    myround(auc(MAD_ROC_SED_6m)[[1]], 2), myround(auc(MAD_ROC_MOD_6m)[[1]], 2), myround(auc(MAD_ROC_VIG_6m)[[1]], 2)
+  )
+)
+kable(
+  ROC_summary_6m, 
+  align = c("l", "l", "r", "r", "r", "r"), 
+  col.names = c(
+    "Accelerometer Metric", "Intensity Category", "Threshold", "Sensitivity", "Specificity", "AUC"
+    )
+  )
+```
+
+## 12 months after surgery
+
+```{r ROC_12m}
+ROC_summary_12m <- data.frame(
+  acc_metric = c(rep("AC", 3), rep("ENMO", 3), rep("MAD", 3)),
+  intensity = rep(c("Sedentary", "Moderate", "Vigorous"), 3),
+  threshold = c(
+    round(cp_AC_ROC_SED_12m[[1]], 0), round(cp_AC_ROC_MOD_12m[[1]], 0), round(cp_AC_ROC_VIG_12m[[1]], 0),
+    round(cp_ENMO_ROC_SED_12m[[1]], 0), round(cp_ENMO_ROC_MOD_12m[[1]], 0), round(cp_ENMO_ROC_VIG_12m[[1]], 0),
+    round(cp_MAD_ROC_SED_12m[[1]], 0), round(cp_MAD_ROC_MOD_12m[[1]], 0), round(cp_MAD_ROC_VIG_12m[[1]], 0)
+  ),
+  sensitivity = c(
+    myround(cp_AC_ROC_SED_12m[[3]], 2), myround(cp_AC_ROC_MOD_12m[[3]], 2), myround(cp_AC_ROC_VIG_12m[[3]], 2),
+    myround(cp_ENMO_ROC_SED_12m[[3]], 2), myround(cp_ENMO_ROC_MOD_12m[[3]], 2), myround(cp_ENMO_ROC_VIG_12m[[3]], 2),
+    myround(cp_MAD_ROC_SED_12m[[3]], 2), myround(cp_MAD_ROC_MOD_12m[[3]], 2), myround(cp_MAD_ROC_VIG_12m[[3]], 2)
+  ),
+  specificity = c(
+    myround(cp_AC_ROC_SED_12m[[2]], 2), myround(cp_AC_ROC_MOD_12m[[2]], 2), myround(cp_AC_ROC_VIG_12m[[2]], 2),
+    myround(cp_ENMO_ROC_SED_12m[[2]], 2), myround(cp_ENMO_ROC_MOD_12m[[2]], 2), myround(cp_ENMO_ROC_VIG_12m[[2]], 2),
+    myround(cp_MAD_ROC_SED_12m[[2]], 2), myround(cp_MAD_ROC_MOD_12m[[2]], 2), myround(cp_MAD_ROC_VIG_12m[[2]], 2)
+  ),
+  AUC = c(
+    myround(auc(AC_ROC_SED_12m)[[1]], 2), myround(auc(AC_ROC_MOD_12m)[[1]], 2), myround(auc(AC_ROC_VIG_12m)[[1]], 2),
+    myround(auc(ENMO_ROC_SED_12m)[[1]], 2), myround(auc(ENMO_ROC_MOD_12m)[[1]], 2), myround(auc(ENMO_ROC_VIG_12m)[[1]], 2),
+    myround(auc(MAD_ROC_SED_12m)[[1]], 2), myround(auc(MAD_ROC_MOD_12m)[[1]], 2), myround(auc(MAD_ROC_VIG_12m)[[1]], 2)
+  )
+)
+kable(
+  ROC_summary_12m, 
+  align = c("l", "l", "r", "r", "r", "r"), 
+  col.names = c(
+    "Accelerometer Metric", "Intensity Category", "Threshold", "Sensitivity", "Specificity", "AUC"
+    )
+  )
+```
+
+# Validity analysis
 
