@@ -32,6 +32,35 @@ database$ID <- str_c(
   sep = "0"
 )
 
+# Define possible samples:
+# 1 = participants who have been evaluated on at least 2 of the 3 evaluations
+# (2nd, 3rd, 4th)
+# 2 = participants who have been evaluated on the 3 eval (2nd, 3rd and 4th),
+# with training sessions attendance <= 50%
+# 3 = participants who have been evaluated on the 3 eval (2nd, 3rd and 4th),
+# no matter training sessions attendance
+sample <- 1
+if (sample == 1) {
+  database <- database
+} else {
+  if (sample == 2) {
+    database <- database %>% 
+      filter(
+        database_ID %in% c(20, 21, 28, 30, 34, 36, 43, 61, 72, 80)
+      )
+  } else {
+    if (sample == 3) {
+      database <- database %>% 
+        filter(
+          database_ID %in% c(
+            20, 21, 22, 28, 29, 30, 34, 36, 38, 39, 43, 
+            46, 49, 54, 55, 61, 62, 63, 68, 72, 73, 80
+            )
+        )
+    }
+  }
+}
+
 # Make cardio_data data frame ---------------------------------------------
 
 cardio_data <- select(
