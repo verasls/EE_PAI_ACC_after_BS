@@ -1,0 +1,78 @@
+---
+title: "Cut-points analysis"
+author: "Lucas Veras"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    number_sections: true
+    toc_float: 
+      collapsed: false
+    theme: flatly
+    code_folding: "show"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+```{r load_packs}
+library(here)
+library(tidyverse)
+```
+
+
+# Sample
+
+```{r load_data}
+source(here("code", "scripts", "01_clean_data.R"))
+```
+
+```{r sample_message}
+if (sample == 1) {
+  message <- "participants who have been evaluated on at least 2 of the 3 evaluations (2nd, 3rd, 4th)"
+} else {
+  if (sample == 2) {
+    message <- "participants who have been evaluated on the 3 eval (2nd, 3rd and 4th), with training sessions attendance <= 50%"
+  } else {
+    if (sample == 3) {
+      message <- "participants who have been evaluated on the 3 eval (2nd, 3rd and 4th), no matter training sessions attendance"
+    }
+  }
+}
+
+n <- hip %>% 
+  filter(!is.na(AC)) %>% 
+  group_by(eval) %>% 
+  summarise(
+    n = n_distinct(ID)
+  )
+```
+
+The selected sample is all `r message`. The number of participants for the 2nd, 3rd and 4th evaluations is `r n[1, 2]`, `r n[2, 2]` and `r n[3, 2]`, respectively.
+
+Descriptive statistics for cardiorespiratory and accelerometry variables, separated by speed is show below, where `speed 0` is sitting rest, `speed 1` is standing rest, and the remaining `speed` values is the walking speed in km^.^h^-1^.
+
+```{r explore}
+source(here("code", "scripts", "02_explore.R"))
+```
+
+```{r cardio_acc_desc}
+knitr::kable(
+  cardio_acc_descriptives,
+  col.names = c(
+    "speed", "n",
+    "kcal (mean)", "kcal (SD)",
+    "VO[2] (mean)", "VO[2] (SD)",
+    "MET (mean)", "MET (SD)",
+    "AC (mean)", "AC (SD)",
+    "ENMO (mean)", "ENMO (SD)",
+    "MAD (mean)", "MAD (SD)"
+  )
+  )
+```
+
+# ROC curves
+
