@@ -6,6 +6,11 @@ library(tidyverse)
 source(here("code", "scripts", "04_analyse_ROC_validity.R")) # Loads ROC curves
 source(here("code", "functions", "classify_PAI.R"))
 
+
+# In this script, PAI at one month after surgery were classified with a
+# cut-point set created for each one, six and twelve months after surgery. 
+# The same procedure was done for six and twelve months after BS.
+
 # 1 month after surgery analysis ------------------------------------------
 
 # AC
