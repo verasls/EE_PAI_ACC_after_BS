@@ -45,15 +45,17 @@ if (sample == 1) {
   }
 }
 
-n <- hip %>% 
+n_eval <- hip %>% 
   filter(!is.na(AC)) %>% 
   group_by(eval) %>% 
-  summarise(
-    n = n_distinct(ID)
-  )
+  summarise(n = n_distinct(ID))
+
+n <- hip %>% 
+  filter(!is.na(AC)) %>% 
+  summarise(n = n_distinct(ID))
 ```
 
-The selected sample was all `r message`. The number of participants for the 1, 6 and 12 months after surgery evaluations was `r n[1, 2]`, `r n[2, 2]` and `r n[3, 2]`, respectively.
+The selected sample was all `r message`. The number of participants for the 1, 6 and 12 months after surgery evaluations was `r n_eval[1, 2]`, `r n_eval[2, 2]` and `r n_eval[3, 2]`, respectively.
 
 Descriptive statistics for cardiorespiratory and accelerometry variables, separated by speed is show below, where `speed 0` is sitting rest, `speed 1` is standing rest, and the remaining `speed` values is the walking speed in km^.^h^-1^.
 
@@ -117,7 +119,7 @@ kable(
   ROC_summary_1m, 
   align = c("l", "l", "r", "r", "r", "r"), 
   col.names = c(
-    "Accelerometer Metric", "Intensity Category", "Threshold", "Sensitivity", "Specificity", "AUC"
+    "Accelerometer metric", "Intensity category", "Threshold", "Sensitivity", "Specificity", "AUC"
     )
   )
 ```
@@ -153,7 +155,7 @@ kable(
   ROC_summary_6m, 
   align = c("l", "l", "r", "r", "r", "r"), 
   col.names = c(
-    "Accelerometer Metric", "Intensity Category", "Threshold", "Sensitivity", "Specificity", "AUC"
+    "Accelerometer metric", "Intensity category", "Threshold", "Sensitivity", "Specificity", "AUC"
     )
   )
 ```
@@ -189,10 +191,80 @@ kable(
   ROC_summary_12m, 
   align = c("l", "l", "r", "r", "r", "r"), 
   col.names = c(
-    "Accelerometer Metric", "Intensity Category", "Threshold", "Sensitivity", "Specificity", "AUC"
+    "Accelerometer metric", "Intensity category", "Threshold", "Sensitivity", "Specificity", "AUC"
     )
   )
 ```
 
 # Validity analysis
 
+The validity of cut-points developed were posteriorly analyzed through leave-one-out cross-validation (LOOCV) method. Hence, each participant’s data was separated into a testing dataset (one at a time) with the remaining data being in the training dataset. New ROC curves, with the same structure as determined for the entire sample, were developed using the training dataset to identify SA or PAI for the only participant in the testing dataset. This process was repeated for all participants (`r n` times).
+
+```{r validity}
+source(here("code", "scripts", "04_analyse_ROC_validity.R"))
+```
+
+## Kappa statistic
+
+### 1 month after surgery
+
+```{r kappa_1m}
+kappa_1m <- data.frame(
+  acc_metric = c(rep("AC", 4), rep("MAD", 4), rep("ENMO", 4)),
+  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Global"), 3),
+  kappa = c(
+    myround(kappa_AC_SED_1m[[5]], 2), myround(kappa_AC_MOD_1m[[5]], 2), myround(kappa_AC_VIG_1m[[5]], 2), myround(kappa_AC_glob_1m[[5]], 2),
+    myround(kappa_ENMO_SED_1m[[5]], 2), myround(kappa_ENMO_MOD_1m[[5]], 2), myround(kappa_ENMO_VIG_1m[[5]], 2), myround(kappa_ENMO_glob_1m[[5]], 2),
+    myround(kappa_MAD_SED_1m[[5]], 2), myround(kappa_MAD_MOD_1m[[5]], 2), myround(kappa_MAD_VIG_1m[[5]], 2), myround(kappa_MAD_glob_1m[[5]], 2)
+  ),
+  weight = rep(c(rep("unweighted", 3), "quadratic"), 3)
+)
+kable(kappa_1m, col.names = c("Accelerometer metric", "Intensity category", "Kappa", "Weight"), align = c("l", "l", "r", "l"))
+```
+
+### 6 months after surgery
+
+```{r kappa_6m}
+kappa_6m <- data.frame(
+  acc_metric = c(rep("AC", 4), rep("MAD", 4), rep("ENMO", 4)),
+  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Global"), 3),
+  kappa = c(
+    myround(kappa_AC_SED_6m[[5]], 2), myround(kappa_AC_MOD_6m[[5]], 2), myround(kappa_AC_VIG_6m[[5]], 2), myround(kappa_AC_glob_6m[[5]], 2),
+    myround(kappa_ENMO_SED_6m[[5]], 2), myround(kappa_ENMO_MOD_6m[[5]], 2), myround(kappa_ENMO_VIG_6m[[5]], 2), myround(kappa_ENMO_glob_6m[[5]], 2),
+    myround(kappa_MAD_SED_6m[[5]], 2), myround(kappa_MAD_MOD_6m[[5]], 2), myround(kappa_MAD_VIG_6m[[5]], 2), myround(kappa_MAD_glob_6m[[5]], 2)
+  ),
+  weight = rep(c(rep("unweighted", 3), "quadratic"), 3)
+)
+kable(kappa_6m, col.names = c("Accelerometer metric", "Intensity category", "Kappa", "Weight"), align = c("l", "l", "r", "l"))
+```
+
+### 12 months after surgery
+
+```{r kappa_12m}
+kappa_12m <- data.frame(
+  acc_metric = c(rep("AC", 4), rep("MAD", 4), rep("ENMO", 4)),
+  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Global"), 3),
+  kappa = c(
+    myround(kappa_AC_SED_12m[[5]], 2), myround(kappa_AC_MOD_12m[[5]], 2), myround(kappa_AC_VIG_12m[[5]], 2), myround(kappa_AC_glob_12m[[5]], 2),
+    myround(kappa_ENMO_SED_12m[[5]], 2), myround(kappa_ENMO_MOD_12m[[5]], 2), myround(kappa_ENMO_VIG_12m[[5]], 2), myround(kappa_ENMO_glob_12m[[5]], 2),
+    myround(kappa_MAD_SED_12m[[5]], 2), myround(kappa_MAD_MOD_12m[[5]], 2), myround(kappa_MAD_VIG_12m[[5]], 2), myround(kappa_MAD_glob_12m[[5]], 2)
+  ),
+  weight = rep(c(rep("unweighted", 3), "quadratic"), 3)
+)
+kable(kappa_12m, col.names = c("Accelerometer metric", "Intensity category", "Kappa", "Weight"), align = c("l", "l", "r", "l"))
+```
+
+## Percent agreement
+
+```{r perc_agree_1m}
+perc_agree <- data.frame(
+  time_surgery = c(rep("1 month", 3), rep("6 months", 3), rep("12 months", 3)),
+  acc_metric = rep(c("AC", "ENMO", "MAD"), 3),
+  perc_agree = c(
+    perc_agree_AC_ROC_1m, perc_agree_ENMO_ROC_1m, perc_agree_MAD_ROC_1m,
+    perc_agree_AC_ROC_6m, perc_agree_ENMO_ROC_6m, perc_agree_MAD_ROC_6m,
+    perc_agree_AC_ROC_12m, perc_agree_ENMO_ROC_12m, perc_agree_MAD_ROC_12m
+  )
+)
+kable(perc_agree, col.names = c("Time after surgery", "Accelerometer metric", "Percent agreement"))
+```
