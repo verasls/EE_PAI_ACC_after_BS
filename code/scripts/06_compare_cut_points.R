@@ -190,7 +190,7 @@ if (KW_MAD_6m[[3]] < 0.05) {
   MAD_6m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_MAD_6m)
 }
 
-# 12 months analysis ------------------------------------------------------
+# 12 months after surgery analysis ----------------------------------------
 
 ## AC
 # Build data frame
