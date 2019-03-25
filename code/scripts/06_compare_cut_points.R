@@ -33,6 +33,11 @@ class_error_AC_1m$cut_point <- as_factor(class_error_AC_1m$cut_point)
 # Run analysis
 KW_AC_1m <- kruskal.test(absolute_error ~ cut_point, data = class_error_AC_1m)
 
+# Post hoc
+if (KW_AC_1m[[3]] < 0.05) {
+  AC_1m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_AC_1m)
+}
+
 ## ENMO
 # Build data frame
 class_error_ENMO_1m <- cutpoints_ENMO_1m %>% 
@@ -58,6 +63,11 @@ class_error_ENMO_1m$cut_point <- as_factor(class_error_ENMO_1m$cut_point)
 # Run analysis
 KW_ENMO_1m <- kruskal.test(absolute_error ~ cut_point, data = class_error_ENMO_1m)
 
+# Post hoc
+if (KW_ENMO_1m[[3]] < 0.05) {
+  ENMO_1m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_ENMO_1m)
+}
+
 ## MAD
 # Build data frame
 class_error_MAD_1m <- cutpoints_MAD_1m %>% 
@@ -82,6 +92,11 @@ class_error_MAD_1m$cut_point <- as_factor(class_error_MAD_1m$cut_point)
 
 # Run analysis
 KW_MAD_1m <- kruskal.test(absolute_error ~ cut_point, data = class_error_MAD_1m)
+
+# Post hoc
+if (KW_MAD_1m[[3]] < 0.05) {
+  MAD_1m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_MAD_1m)
+}
 
 # 6 months after surgery analysis -----------------------------------------
 
@@ -110,6 +125,11 @@ class_error_AC_6m$cut_point <- as_factor(class_error_AC_6m$cut_point)
 # Run analysis
 KW_AC_6m <- kruskal.test(absolute_error ~ cut_point, data = class_error_AC_6m)
 
+# Post hoc
+if (KW_AC_6m[[3]] < 0.05) {
+  AC_6m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_AC_6m)
+}
+
 ## ENMO
 # Build data frame
 class_error_ENMO_6m <- cutpoints_ENMO_6m %>% 
@@ -136,7 +156,9 @@ class_error_ENMO_6m$cut_point <- as_factor(class_error_ENMO_6m$cut_point)
 KW_ENMO_6m <- kruskal.test(absolute_error ~ cut_point, data = class_error_ENMO_6m)
 
 # Post hoc
-ENMO_6m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_ENMO_6m)
+if (KW_ENMO_6m[[3]] < 0.05) {
+  ENMO_6m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_ENMO_6m)
+}
 
 ## MAD
 # Build data frame
@@ -164,7 +186,9 @@ class_error_MAD_6m$cut_point <- as_factor(class_error_MAD_6m$cut_point)
 KW_MAD_6m <- kruskal.test(absolute_error ~ cut_point, data = class_error_MAD_6m)
 
 # Post hoc
-MAD_6m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_MAD_6m)
+if (KW_MAD_6m[[3]] < 0.05) {
+  MAD_6m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_MAD_6m)
+}
 
 # 12 months analysis ------------------------------------------------------
 
@@ -193,6 +217,11 @@ class_error_AC_12m$cut_point <- as_factor(class_error_AC_12m$cut_point)
 # Run analysis
 KW_AC_12m <- kruskal.test(absolute_error ~ cut_point, data = class_error_AC_12m)
 
+# Post hoc
+if (KW_AC_12m[[3]] < 0.05) {
+  AC_12m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_AC_12m)
+}
+
 ## ENMO
 # Build data frame
 class_error_ENMO_12m <- cutpoints_ENMO_12m %>% 
@@ -219,7 +248,9 @@ class_error_ENMO_12m$cut_point <- as_factor(class_error_ENMO_12m$cut_point)
 KW_ENMO_12m <- kruskal.test(absolute_error ~ cut_point, data = class_error_ENMO_12m)
 
 # Post hoc
-ENMO_12m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_ENMO_12m)
+if (KW_ENMO_12m[[3]] < 0.05) {
+  ENMO_12m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_ENMO_12m)
+}
 
 ## MAD
 # Build data frame
@@ -247,4 +278,6 @@ class_error_MAD_12m$cut_point <- as_factor(class_error_MAD_12m$cut_point)
 KW_MAD_12m <- kruskal.test(absolute_error ~ cut_point, data = class_error_MAD_12m)
 
 # Post hoc
-MAD_12m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_MAD_12m)
+if (KW_MAD_12m[[3]] < 0.05) {
+  MAD_12m_posthoc <- kruskalmc(absolute_error ~ cut_point, data = class_error_MAD_12m)
+}
