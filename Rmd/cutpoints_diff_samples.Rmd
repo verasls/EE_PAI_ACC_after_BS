@@ -268,3 +268,100 @@ perc_agree <- data.frame(
 )
 kable(perc_agree, col.names = c("Time after surgery", "Accelerometer metric", "Percent agreement"))
 ```
+
+
+# Cut-points comparison
+
+The need of specific cut-points for one, six, and twelve months after surgery was tested. Thus, SA, light physical activity (LPA), moderate physical activity (MPA) and vigorous physical activity (VPA) at one month after surgery were identified with a cut-point set created for each one, six and twelve months after surgery. The same procedure was done for six and twelve months after surgery. These classifications were posteriorly compared with those obtained by indirect calorimetry to calculate classification error for each cut-point set in each time point. Lastly, absolute values of classification error from each cut-point set for each one, six and twelve months after surgery were compared with Kruskal-Wallis test.
+
+```{r cutpoints_comparison}
+source(here("code", "scripts", "05_classify_PAI.R"))
+source(here("code", "scripts", "06_compare_cut_points.R"))
+```
+
+## 1 month after surgery subsample
+
+#### AC
+```{r KW_AC_1m}
+KW_AC_1m
+
+if (KW_AC_1m[[3]] < 0.05) {
+  AC_1m_posthoc
+}
+```
+
+#### ENMO
+```{r KW_ENMO_1m}
+KW_ENMO_1m
+
+if (KW_ENMO_1m[[3]] < 0.05) {
+  ENMO_1m_posthoc
+}
+```
+
+#### MAD
+```{r KW_MAD_1m}
+KW_MAD_1m
+
+if (KW_MAD_1m[[3]] < 0.05) {
+  MAD_1m_posthoc
+}
+```
+
+## 6 months after surgery subsample
+
+#### AC
+```{r KW_AC_6m}
+KW_AC_6m
+
+if (KW_AC_6m[[3]] < 0.05) {
+  AC_6m_posthoc
+}
+```
+
+#### ENMO
+```{r KW_ENMO_6m}
+KW_ENMO_6m
+
+if (KW_ENMO_6m[[3]] < 0.05) {
+  ENMO_6m_posthoc
+}
+```
+
+#### MAD
+```{r KW_MAD_6m}
+KW_MAD_6m
+
+if (KW_MAD_6m[[3]] < 0.05) {
+  MAD_6m_posthoc
+}
+```
+
+## 12 months after surgery subsample
+
+#### AC
+```{r KW_AC_12m}
+KW_AC_12m
+
+if (KW_AC_12m[[3]] < 0.05) {
+  AC_12m_posthoc
+}
+```
+
+#### ENMO
+```{r KW_ENMO_12m}
+KW_ENMO_12m
+
+if (KW_ENMO_12m[[3]] < 0.05) {
+  ENMO_12m_posthoc
+}
+```
+
+#### MAD
+```{r KW_MAD_12m}
+KW_MAD_12m
+
+if (KW_MAD_12m[[3]] < 0.05) {
+  MAD_12m_posthoc
+}
+```
