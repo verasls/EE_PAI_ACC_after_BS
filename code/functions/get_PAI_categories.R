@@ -42,6 +42,12 @@ get_PAI_categories <- function(df) {
     } else {
       df$VIG_CAT_by_MET[i] <- 0
     }
+    # Moderate to vigorous
+    if (df$MET[i] >= 3) {
+      df$MVPA_CAT_by_MET[i] <- 1
+    } else {
+      df$MVPA_CAT_by_MET <- 0
+    }
     
     # 1 = Sedentary; 2 = Light; 3 = Moderate; 4 = Vigorous
     if (df$SED_CAT_by_MET[i] == 1) {
