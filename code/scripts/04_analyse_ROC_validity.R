@@ -105,6 +105,7 @@ LOOCV_MAD_ROC_12m <- do.call(
 kappa_AC_SED_1m  <- kappa2(select(LOOCV_AC_ROC_1m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_AC_MOD_1m  <- kappa2(select(LOOCV_AC_ROC_1m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_AC_VIG_1m  <- kappa2(select(LOOCV_AC_ROC_1m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_AC_MVPA_1m <- kappa2(select(LOOCV_AC_ROC_1m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_AC_glob_1m <- kappa2(select(LOOCV_AC_ROC_1m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                            weight = "squared")
 
@@ -112,6 +113,7 @@ kappa_AC_glob_1m <- kappa2(select(LOOCV_AC_ROC_1m, INTENS_CAT_by_MET, INTENS_CAT
 kappa_ENMO_SED_1m  <- kappa2(select(LOOCV_ENMO_ROC_1m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_ENMO_MOD_1m  <- kappa2(select(LOOCV_ENMO_ROC_1m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_ENMO_VIG_1m  <- kappa2(select(LOOCV_ENMO_ROC_1m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_ENMO_MVPA_1m <- kappa2(select(LOOCV_ENMO_ROC_1m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_ENMO_glob_1m <- kappa2(select(LOOCV_ENMO_ROC_1m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                            weight = "squared")
 
@@ -119,6 +121,7 @@ kappa_ENMO_glob_1m <- kappa2(select(LOOCV_ENMO_ROC_1m, INTENS_CAT_by_MET, INTENS
 kappa_MAD_SED_1m  <- kappa2(select(LOOCV_MAD_ROC_1m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_MAD_MOD_1m  <- kappa2(select(LOOCV_MAD_ROC_1m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_MAD_VIG_1m  <- kappa2(select(LOOCV_MAD_ROC_1m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_MAD_MVPA_1m <- kappa2(select(LOOCV_MAD_ROC_1m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_MAD_glob_1m <- kappa2(select(LOOCV_MAD_ROC_1m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                              weight = "squared")
 
@@ -128,6 +131,7 @@ kappa_MAD_glob_1m <- kappa2(select(LOOCV_MAD_ROC_1m, INTENS_CAT_by_MET, INTENS_C
 kappa_AC_SED_6m  <- kappa2(select(LOOCV_AC_ROC_6m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_AC_MOD_6m  <- kappa2(select(LOOCV_AC_ROC_6m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_AC_VIG_6m  <- kappa2(select(LOOCV_AC_ROC_6m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_AC_MVPA_6m <- kappa2(select(LOOCV_AC_ROC_6m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_AC_glob_6m <- kappa2(select(LOOCV_AC_ROC_6m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                            weight = "squared")
 
@@ -135,6 +139,7 @@ kappa_AC_glob_6m <- kappa2(select(LOOCV_AC_ROC_6m, INTENS_CAT_by_MET, INTENS_CAT
 kappa_ENMO_SED_6m  <- kappa2(select(LOOCV_ENMO_ROC_6m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_ENMO_MOD_6m  <- kappa2(select(LOOCV_ENMO_ROC_6m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_ENMO_VIG_6m  <- kappa2(select(LOOCV_ENMO_ROC_6m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_ENMO_MVPA_6m <- kappa2(select(LOOCV_ENMO_ROC_6m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_ENMO_glob_6m <- kappa2(select(LOOCV_ENMO_ROC_6m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                              weight = "squared")
 
@@ -142,6 +147,7 @@ kappa_ENMO_glob_6m <- kappa2(select(LOOCV_ENMO_ROC_6m, INTENS_CAT_by_MET, INTENS
 kappa_MAD_SED_6m  <- kappa2(select(LOOCV_MAD_ROC_6m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_MAD_MOD_6m  <- kappa2(select(LOOCV_MAD_ROC_6m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_MAD_VIG_6m  <- kappa2(select(LOOCV_MAD_ROC_6m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_MAD_MVPA_6m <- kappa2(select(LOOCV_MAD_ROC_6m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_MAD_glob_6m <- kappa2(select(LOOCV_MAD_ROC_6m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                             weight = "squared")
 
@@ -151,6 +157,7 @@ kappa_MAD_glob_6m <- kappa2(select(LOOCV_MAD_ROC_6m, INTENS_CAT_by_MET, INTENS_C
 kappa_AC_SED_12m  <- kappa2(select(LOOCV_AC_ROC_12m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_AC_MOD_12m  <- kappa2(select(LOOCV_AC_ROC_12m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_AC_VIG_12m  <- kappa2(select(LOOCV_AC_ROC_12m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_AC_MVPA_12m <- kappa2(select(LOOCV_AC_ROC_12m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_AC_glob_12m <- kappa2(select(LOOCV_AC_ROC_12m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                            weight = "squared")
 
@@ -158,6 +165,7 @@ kappa_AC_glob_12m <- kappa2(select(LOOCV_AC_ROC_12m, INTENS_CAT_by_MET, INTENS_C
 kappa_ENMO_SED_12m  <- kappa2(select(LOOCV_ENMO_ROC_12m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_ENMO_MOD_12m  <- kappa2(select(LOOCV_ENMO_ROC_12m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_ENMO_VIG_12m  <- kappa2(select(LOOCV_ENMO_ROC_12m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_ENMO_MVPA_12m <- kappa2(select(LOOCV_ENMO_ROC_12m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_ENMO_glob_12m <- kappa2(select(LOOCV_ENMO_ROC_12m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                              weight = "squared")
 
@@ -165,6 +173,7 @@ kappa_ENMO_glob_12m <- kappa2(select(LOOCV_ENMO_ROC_12m, INTENS_CAT_by_MET, INTE
 kappa_MAD_SED_12m  <- kappa2(select(LOOCV_MAD_ROC_12m, SED_CAT_by_MET, SED_CAT_by_ROC))
 kappa_MAD_MOD_12m  <- kappa2(select(LOOCV_MAD_ROC_12m, MOD_CAT_by_MET, MOD_CAT_by_ROC))
 kappa_MAD_VIG_12m  <- kappa2(select(LOOCV_MAD_ROC_12m, VIG_CAT_by_MET, VIG_CAT_by_ROC))
+kappa_MAD_MVPA_12m <- kappa2(select(LOOCV_MAD_ROC_12m, MVPA_CAT_by_MET, MVPA_CAT_by_ROC))
 kappa_MAD_glob_12m <- kappa2(select(LOOCV_MAD_ROC_12m, INTENS_CAT_by_MET, INTENS_CAT_by_ROC), 
                             weight = "squared")
 
