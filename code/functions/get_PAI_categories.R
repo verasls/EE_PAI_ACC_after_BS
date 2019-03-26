@@ -13,6 +13,7 @@ get_PAI_categories <- function(df) {
   df$LIG_CAT_by_MET    <- NA
   df$MOD_CAT_by_MET    <- NA
   df$VIG_CAT_by_MET    <- NA
+  df$MVPA_CAT_by_MET   <- NA
   df$INTENS_CAT_by_MET <- NA
   
   for (i in 1:nrow(df))
@@ -46,7 +47,7 @@ get_PAI_categories <- function(df) {
     if (df$MET[i] >= 3) {
       df$MVPA_CAT_by_MET[i] <- 1
     } else {
-      df$MVPA_CAT_by_MET <- 0
+      df$MVPA_CAT_by_MET[i] <- 0
     }
     
     # 1 = Sedentary; 2 = Light; 3 = Moderate; 4 = Vigorous
