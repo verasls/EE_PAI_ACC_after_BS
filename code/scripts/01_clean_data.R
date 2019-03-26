@@ -117,6 +117,7 @@ sample_desc <- filter(
 ) 
 
 # Get BMI
+sample_desc$BMI <- NA
 for (i in 1:nrow(sample_desc)) {
   sample_desc$BMI[i] <- 
     sample_desc$body_mass[i] / ((sample_desc$height[i] / 100)^2)
