@@ -92,27 +92,27 @@ source(here("code", "scripts", "03_create_ROC_curves.R"))
 
 ```{r ROC_1m}
 ROC_summary_1m <- data.frame(
-  acc_metric = c(rep("AC", 3), rep("ENMO", 3), rep("MAD", 3)),
-  intensity = rep(c("Sedentary", "Moderate", "Vigorous"), 3),
+  acc_metric = c(rep("AC", 4), rep("ENMO", 4), rep("MAD", 4)),
+  intensity = rep(c("Sedentary", "Moderate", "Vigorous", "Moderate to vigorous"), 3),
   threshold = c(
-    round(cp_AC_ROC_SED_1m[[1]], 0), round(cp_AC_ROC_MOD_1m[[1]], 0), round(cp_AC_ROC_VIG_1m[[1]], 0),
-    round(cp_ENMO_ROC_SED_1m[[1]], 0), round(cp_ENMO_ROC_MOD_1m[[1]], 0), round(cp_ENMO_ROC_VIG_1m[[1]], 0),
-    round(cp_MAD_ROC_SED_1m[[1]], 0), round(cp_MAD_ROC_MOD_1m[[1]], 0), round(cp_MAD_ROC_VIG_1m[[1]], 0)
+    round(cp_AC_ROC_SED_1m[[1]], 0), round(cp_AC_ROC_MOD_1m[[1]], 0), round(cp_AC_ROC_VIG_1m[[1]], 0), round(cp_AC_ROC_MVPA_1m[[1]], 0),
+    round(cp_ENMO_ROC_SED_1m[[1]], 0), round(cp_ENMO_ROC_MOD_1m[[1]], 0), round(cp_ENMO_ROC_VIG_1m[[1]], 0), round(cp_ENMO_ROC_MVPA_1m[[1]], 0),
+    round(cp_MAD_ROC_SED_1m[[1]], 0), round(cp_MAD_ROC_MOD_1m[[1]], 0), round(cp_MAD_ROC_VIG_1m[[1]], 0), round(cp_MAD_ROC_MVPA_1m[[1]], 0)
   ),
   sensitivity = c(
-    myround(cp_AC_ROC_SED_1m[[3]], 2), myround(cp_AC_ROC_MOD_1m[[3]], 2), myround(cp_AC_ROC_VIG_1m[[3]], 2),
-    myround(cp_ENMO_ROC_SED_1m[[3]], 2), myround(cp_ENMO_ROC_MOD_1m[[3]], 2), myround(cp_ENMO_ROC_VIG_1m[[3]], 2),
-    myround(cp_MAD_ROC_SED_1m[[3]], 2), myround(cp_MAD_ROC_MOD_1m[[3]], 2), myround(cp_MAD_ROC_VIG_1m[[3]], 2)
+    myround(cp_AC_ROC_SED_1m[[3]], 2), myround(cp_AC_ROC_MOD_1m[[3]], 2), myround(cp_AC_ROC_VIG_1m[[3]], 2), myround(cp_AC_ROC_MVPA_1m[[3]], 2),
+    myround(cp_ENMO_ROC_SED_1m[[3]], 2), myround(cp_ENMO_ROC_MOD_1m[[3]], 2), myround(cp_ENMO_ROC_VIG_1m[[3]], 2), myround(cp_ENMO_ROC_MVPA_1m[[3]], 2),
+    myround(cp_MAD_ROC_SED_1m[[3]], 2), myround(cp_MAD_ROC_MOD_1m[[3]], 2), myround(cp_MAD_ROC_VIG_1m[[3]], 2), myround(cp_MAD_ROC_MVPA_1m[[3]], 2)
   ),
   specificity = c(
-    myround(cp_AC_ROC_SED_1m[[2]], 2), myround(cp_AC_ROC_MOD_1m[[2]], 2), myround(cp_AC_ROC_VIG_1m[[2]], 2),
-    myround(cp_ENMO_ROC_SED_1m[[2]], 2), myround(cp_ENMO_ROC_MOD_1m[[2]], 2), myround(cp_ENMO_ROC_VIG_1m[[2]], 2),
-    myround(cp_MAD_ROC_SED_1m[[2]], 2), myround(cp_MAD_ROC_MOD_1m[[2]], 2), myround(cp_MAD_ROC_VIG_1m[[2]], 2)
+    myround(cp_AC_ROC_SED_1m[[2]], 2), myround(cp_AC_ROC_MOD_1m[[2]], 2), myround(cp_AC_ROC_VIG_1m[[2]], 2), myround(cp_AC_ROC_MVPA_1m[[2]], 2),
+    myround(cp_ENMO_ROC_SED_1m[[2]], 2), myround(cp_ENMO_ROC_MOD_1m[[2]], 2), myround(cp_ENMO_ROC_VIG_1m[[2]], 2), myround(cp_ENMO_ROC_MVPA_1m[[2]], 2),
+    myround(cp_MAD_ROC_SED_1m[[2]], 2), myround(cp_MAD_ROC_MOD_1m[[2]], 2), myround(cp_MAD_ROC_VIG_1m[[2]], 2), myround(cp_MAD_ROC_MVPA_1m[[2]], 2)
   ),
   AUC = c(
-    myround(auc(AC_ROC_SED_1m)[[1]], 2), myround(auc(AC_ROC_MOD_1m)[[1]], 2), myround(auc(AC_ROC_VIG_1m)[[1]], 2),
-    myround(auc(ENMO_ROC_SED_1m)[[1]], 2), myround(auc(ENMO_ROC_MOD_1m)[[1]], 2), myround(auc(ENMO_ROC_VIG_1m)[[1]], 2),
-    myround(auc(MAD_ROC_SED_1m)[[1]], 2), myround(auc(MAD_ROC_MOD_1m)[[1]], 2), myround(auc(MAD_ROC_VIG_1m)[[1]], 2)
+    myround(auc(AC_ROC_SED_1m)[[1]], 2), myround(auc(AC_ROC_MOD_1m)[[1]], 2), myround(auc(AC_ROC_VIG_1m)[[1]], 2), myround(auc(AC_ROC_MVPA_1m)[[1]], 2),
+    myround(auc(ENMO_ROC_SED_1m)[[1]], 2), myround(auc(ENMO_ROC_MOD_1m)[[1]], 2), myround(auc(ENMO_ROC_VIG_1m)[[1]], 2), myround(auc(ENMO_ROC_MVPA_1m)[[1]], 2),
+    myround(auc(MAD_ROC_SED_1m)[[1]], 2), myround(auc(MAD_ROC_MOD_1m)[[1]], 2), myround(auc(MAD_ROC_VIG_1m)[[1]], 2), myround(auc(MAD_ROC_MVPA_1m)[[1]], 2)
   )
 )
 kable(
@@ -128,27 +128,27 @@ kable(
 
 ```{r ROC_6m}
 ROC_summary_6m <- data.frame(
-  acc_metric = c(rep("AC", 3), rep("ENMO", 3), rep("MAD", 3)),
-  intensity = rep(c("Sedentary", "Moderate", "Vigorous"), 3),
+  acc_metric = c(rep("AC", 4), rep("ENMO", 4), rep("MAD", 4)),
+  intensity = rep(c("Sedentary", "Moderate", "Vigorous", "Moderate to vigorous"), 3),
   threshold = c(
-    round(cp_AC_ROC_SED_6m[[1]], 0), round(cp_AC_ROC_MOD_6m[[1]], 0), round(cp_AC_ROC_VIG_6m[[1]], 0),
-    round(cp_ENMO_ROC_SED_6m[[1]], 0), round(cp_ENMO_ROC_MOD_6m[[1]], 0), round(cp_ENMO_ROC_VIG_6m[[1]], 0),
-    round(cp_MAD_ROC_SED_6m[[1]], 0), round(cp_MAD_ROC_MOD_6m[[1]], 0), round(cp_MAD_ROC_VIG_6m[[1]], 0)
+    round(cp_AC_ROC_SED_6m[[1]], 0), round(cp_AC_ROC_MOD_6m[[1]], 0), round(cp_AC_ROC_VIG_6m[[1]], 0), round(cp_AC_ROC_MVPA_6m[[1]], 0),
+    round(cp_ENMO_ROC_SED_6m[[1]], 0), round(cp_ENMO_ROC_MOD_6m[[1]], 0), round(cp_ENMO_ROC_VIG_6m[[1]], 0), round(cp_ENMO_ROC_MVPA_6m[[1]], 0),
+    round(cp_MAD_ROC_SED_6m[[1]], 0), round(cp_MAD_ROC_MOD_6m[[1]], 0), round(cp_MAD_ROC_VIG_6m[[1]], 0), round(cp_MAD_ROC_MVPA_6m[[1]], 0)
   ),
   sensitivity = c(
-    myround(cp_AC_ROC_SED_6m[[3]], 2), myround(cp_AC_ROC_MOD_6m[[3]], 2), myround(cp_AC_ROC_VIG_6m[[3]], 2),
-    myround(cp_ENMO_ROC_SED_6m[[3]], 2), myround(cp_ENMO_ROC_MOD_6m[[3]], 2), myround(cp_ENMO_ROC_VIG_6m[[3]], 2),
-    myround(cp_MAD_ROC_SED_6m[[3]], 2), myround(cp_MAD_ROC_MOD_6m[[3]], 2), myround(cp_MAD_ROC_VIG_6m[[3]], 2)
+    myround(cp_AC_ROC_SED_6m[[3]], 2), myround(cp_AC_ROC_MOD_6m[[3]], 2), myround(cp_AC_ROC_VIG_6m[[3]], 2), myround(cp_AC_ROC_MVPA_6m[[3]], 2),
+    myround(cp_ENMO_ROC_SED_6m[[3]], 2), myround(cp_ENMO_ROC_MOD_6m[[3]], 2), myround(cp_ENMO_ROC_VIG_6m[[3]], 2), myround(cp_ENMO_ROC_MVPA_6m[[3]], 2),
+    myround(cp_MAD_ROC_SED_6m[[3]], 2), myround(cp_MAD_ROC_MOD_6m[[3]], 2), myround(cp_MAD_ROC_VIG_6m[[3]], 2), myround(cp_MAD_ROC_MVPA_6m[[3]], 2)
   ),
   specificity = c(
-    myround(cp_AC_ROC_SED_6m[[2]], 2), myround(cp_AC_ROC_MOD_6m[[2]], 2), myround(cp_AC_ROC_VIG_6m[[2]], 2),
-    myround(cp_ENMO_ROC_SED_6m[[2]], 2), myround(cp_ENMO_ROC_MOD_6m[[2]], 2), myround(cp_ENMO_ROC_VIG_6m[[2]], 2),
-    myround(cp_MAD_ROC_SED_6m[[2]], 2), myround(cp_MAD_ROC_MOD_6m[[2]], 2), myround(cp_MAD_ROC_VIG_6m[[2]], 2)
+    myround(cp_AC_ROC_SED_6m[[2]], 2), myround(cp_AC_ROC_MOD_6m[[2]], 2), myround(cp_AC_ROC_VIG_6m[[2]], 2), myround(cp_AC_ROC_MVPA_6m[[2]], 2),
+    myround(cp_ENMO_ROC_SED_6m[[2]], 2), myround(cp_ENMO_ROC_MOD_6m[[2]], 2), myround(cp_ENMO_ROC_VIG_6m[[2]], 2), myround(cp_ENMO_ROC_MVPA_6m[[2]], 2),
+    myround(cp_MAD_ROC_SED_6m[[2]], 2), myround(cp_MAD_ROC_MOD_6m[[2]], 2), myround(cp_MAD_ROC_VIG_6m[[2]], 2), myround(cp_MAD_ROC_MVPA_6m[[2]], 2)
   ),
   AUC = c(
-    myround(auc(AC_ROC_SED_6m)[[1]], 2), myround(auc(AC_ROC_MOD_6m)[[1]], 2), myround(auc(AC_ROC_VIG_6m)[[1]], 2),
-    myround(auc(ENMO_ROC_SED_6m)[[1]], 2), myround(auc(ENMO_ROC_MOD_6m)[[1]], 2), myround(auc(ENMO_ROC_VIG_6m)[[1]], 2),
-    myround(auc(MAD_ROC_SED_6m)[[1]], 2), myround(auc(MAD_ROC_MOD_6m)[[1]], 2), myround(auc(MAD_ROC_VIG_6m)[[1]], 2)
+    myround(auc(AC_ROC_SED_6m)[[1]], 2), myround(auc(AC_ROC_MOD_6m)[[1]], 2), myround(auc(AC_ROC_VIG_6m)[[1]], 2), myround(auc(AC_ROC_MVPA_6m)[[1]], 2),
+    myround(auc(ENMO_ROC_SED_6m)[[1]], 2), myround(auc(ENMO_ROC_MOD_6m)[[1]], 2), myround(auc(ENMO_ROC_VIG_6m)[[1]], 2), myround(auc(ENMO_ROC_MVPA_6m)[[1]], 2),
+    myround(auc(MAD_ROC_SED_6m)[[1]], 2), myround(auc(MAD_ROC_MOD_6m)[[1]], 2), myround(auc(MAD_ROC_VIG_6m)[[1]], 2), myround(auc(MAD_ROC_MVPA_6m)[[1]], 2)
   )
 )
 kable(
@@ -164,27 +164,27 @@ kable(
 
 ```{r ROC_12m}
 ROC_summary_12m <- data.frame(
-  acc_metric = c(rep("AC", 3), rep("ENMO", 3), rep("MAD", 3)),
-  intensity = rep(c("Sedentary", "Moderate", "Vigorous"), 3),
+  acc_metric = c(rep("AC", 4), rep("ENMO", 4), rep("MAD", 4)),
+  intensity = rep(c("Sedentary", "Moderate", "Vigorous", "Moderate to vigorous"), 3),
   threshold = c(
-    round(cp_AC_ROC_SED_12m[[1]], 0), round(cp_AC_ROC_MOD_12m[[1]], 0), round(cp_AC_ROC_VIG_12m[[1]], 0),
-    round(cp_ENMO_ROC_SED_12m[[1]], 0), round(cp_ENMO_ROC_MOD_12m[[1]], 0), round(cp_ENMO_ROC_VIG_12m[[1]], 0),
-    round(cp_MAD_ROC_SED_12m[[1]], 0), round(cp_MAD_ROC_MOD_12m[[1]], 0), round(cp_MAD_ROC_VIG_12m[[1]], 0)
+    round(cp_AC_ROC_SED_12m[[1]], 0), round(cp_AC_ROC_MOD_12m[[1]], 0), round(cp_AC_ROC_VIG_12m[[1]], 0), round(cp_AC_ROC_MVPA_12m[[1]], 0),
+    round(cp_ENMO_ROC_SED_12m[[1]], 0), round(cp_ENMO_ROC_MOD_12m[[1]], 0), round(cp_ENMO_ROC_VIG_12m[[1]], 0), round(cp_ENMO_ROC_MVPA_12m[[1]], 0),
+    round(cp_MAD_ROC_SED_12m[[1]], 0), round(cp_MAD_ROC_MOD_12m[[1]], 0), round(cp_MAD_ROC_VIG_12m[[1]], 0), round(cp_MAD_ROC_MVPA_12m[[1]], 0)
   ),
   sensitivity = c(
-    myround(cp_AC_ROC_SED_12m[[3]], 2), myround(cp_AC_ROC_MOD_12m[[3]], 2), myround(cp_AC_ROC_VIG_12m[[3]], 2),
-    myround(cp_ENMO_ROC_SED_12m[[3]], 2), myround(cp_ENMO_ROC_MOD_12m[[3]], 2), myround(cp_ENMO_ROC_VIG_12m[[3]], 2),
-    myround(cp_MAD_ROC_SED_12m[[3]], 2), myround(cp_MAD_ROC_MOD_12m[[3]], 2), myround(cp_MAD_ROC_VIG_12m[[3]], 2)
+    myround(cp_AC_ROC_SED_12m[[3]], 2), myround(cp_AC_ROC_MOD_12m[[3]], 2), myround(cp_AC_ROC_VIG_12m[[3]], 2), myround(cp_AC_ROC_MVPA_12m[[3]], 2),
+    myround(cp_ENMO_ROC_SED_12m[[3]], 2), myround(cp_ENMO_ROC_MOD_12m[[3]], 2), myround(cp_ENMO_ROC_VIG_12m[[3]], 2), myround(cp_ENMO_ROC_MVPA_12m[[3]], 2),
+    myround(cp_MAD_ROC_SED_12m[[3]], 2), myround(cp_MAD_ROC_MOD_12m[[3]], 2), myround(cp_MAD_ROC_VIG_12m[[3]], 2), myround(cp_MAD_ROC_MVPA_12m[[3]], 2)
   ),
   specificity = c(
-    myround(cp_AC_ROC_SED_12m[[2]], 2), myround(cp_AC_ROC_MOD_12m[[2]], 2), myround(cp_AC_ROC_VIG_12m[[2]], 2),
-    myround(cp_ENMO_ROC_SED_12m[[2]], 2), myround(cp_ENMO_ROC_MOD_12m[[2]], 2), myround(cp_ENMO_ROC_VIG_12m[[2]], 2),
-    myround(cp_MAD_ROC_SED_12m[[2]], 2), myround(cp_MAD_ROC_MOD_12m[[2]], 2), myround(cp_MAD_ROC_VIG_12m[[2]], 2)
+    myround(cp_AC_ROC_SED_12m[[2]], 2), myround(cp_AC_ROC_MOD_12m[[2]], 2), myround(cp_AC_ROC_VIG_12m[[2]], 2), myround(cp_AC_ROC_MVPA_12m[[2]], 2),
+    myround(cp_ENMO_ROC_SED_12m[[2]], 2), myround(cp_ENMO_ROC_MOD_12m[[2]], 2), myround(cp_ENMO_ROC_VIG_12m[[2]], 2), myround(cp_ENMO_ROC_MVPA_12m[[2]], 2),
+    myround(cp_MAD_ROC_SED_12m[[2]], 2), myround(cp_MAD_ROC_MOD_12m[[2]], 2), myround(cp_MAD_ROC_VIG_12m[[2]], 2), myround(cp_MAD_ROC_MVPA_12m[[2]], 2)
   ),
   AUC = c(
-    myround(auc(AC_ROC_SED_12m)[[1]], 2), myround(auc(AC_ROC_MOD_12m)[[1]], 2), myround(auc(AC_ROC_VIG_12m)[[1]], 2),
-    myround(auc(ENMO_ROC_SED_12m)[[1]], 2), myround(auc(ENMO_ROC_MOD_12m)[[1]], 2), myround(auc(ENMO_ROC_VIG_12m)[[1]], 2),
-    myround(auc(MAD_ROC_SED_12m)[[1]], 2), myround(auc(MAD_ROC_MOD_12m)[[1]], 2), myround(auc(MAD_ROC_VIG_12m)[[1]], 2)
+    myround(auc(AC_ROC_SED_12m)[[1]], 2), myround(auc(AC_ROC_MOD_12m)[[1]], 2), myround(auc(AC_ROC_VIG_12m)[[1]], 2), myround(auc(AC_ROC_MVPA_12m)[[1]], 2),
+    myround(auc(ENMO_ROC_SED_12m)[[1]], 2), myround(auc(ENMO_ROC_MOD_12m)[[1]], 2), myround(auc(ENMO_ROC_VIG_12m)[[1]], 2), myround(auc(ENMO_ROC_MVPA_12m)[[1]], 2),
+    myround(auc(MAD_ROC_SED_12m)[[1]], 2), myround(auc(MAD_ROC_MOD_12m)[[1]], 2), myround(auc(MAD_ROC_VIG_12m)[[1]], 2), myround(auc(MAD_ROC_MVPA_12m)[[1]], 2)
   )
 )
 kable(
@@ -210,14 +210,14 @@ source(here("code", "scripts", "04_analyse_ROC_validity.R"))
 
 ```{r kappa_1m}
 kappa_1m <- data.frame(
-  acc_metric = c(rep("AC", 4), rep("MAD", 4), rep("ENMO", 4)),
-  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Global"), 3),
+  acc_metric = c(rep("AC", 5), rep("MAD", 5), rep("ENMO", 5)),
+  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Moderate to vigorous", "Global"), 3),
   kappa = c(
-    myround(kappa_AC_SED_1m[[5]], 2), myround(kappa_AC_MOD_1m[[5]], 2), myround(kappa_AC_VIG_1m[[5]], 2), myround(kappa_AC_glob_1m[[5]], 2),
-    myround(kappa_ENMO_SED_1m[[5]], 2), myround(kappa_ENMO_MOD_1m[[5]], 2), myround(kappa_ENMO_VIG_1m[[5]], 2), myround(kappa_ENMO_glob_1m[[5]], 2),
-    myround(kappa_MAD_SED_1m[[5]], 2), myround(kappa_MAD_MOD_1m[[5]], 2), myround(kappa_MAD_VIG_1m[[5]], 2), myround(kappa_MAD_glob_1m[[5]], 2)
+    myround(kappa_AC_SED_1m[[5]], 2), myround(kappa_AC_MOD_1m[[5]], 2), myround(kappa_AC_VIG_1m[[5]], 2), myround(kappa_AC_MVPA_1m[[5]], 2), myround(kappa_AC_glob_1m[[5]], 2),
+    myround(kappa_ENMO_SED_1m[[5]], 2), myround(kappa_ENMO_MOD_1m[[5]], 2), myround(kappa_ENMO_VIG_1m[[5]], 2), myround(kappa_ENMO_MVPA_1m[[5]], 2), myround(kappa_ENMO_glob_1m[[5]], 2),
+    myround(kappa_MAD_SED_1m[[5]], 2), myround(kappa_MAD_MOD_1m[[5]], 2), myround(kappa_MAD_VIG_1m[[5]], 2), myround(kappa_MAD_MVPA_1m[[5]], 2), myround(kappa_MAD_glob_1m[[5]], 2)
   ),
-  weight = rep(c(rep("unweighted", 3), "quadratic"), 3)
+  weight = rep(c(rep("unweighted", 4), "quadratic"), 3)
 )
 kable(kappa_1m, col.names = c("Accelerometer metric", "Intensity category", "Kappa", "Weight"), align = c("l", "l", "r", "l"))
 ```
@@ -226,14 +226,14 @@ kable(kappa_1m, col.names = c("Accelerometer metric", "Intensity category", "Kap
 
 ```{r kappa_6m}
 kappa_6m <- data.frame(
-  acc_metric = c(rep("AC", 4), rep("MAD", 4), rep("ENMO", 4)),
-  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Global"), 3),
+  acc_metric = c(rep("AC", 5), rep("MAD", 5), rep("ENMO", 5)),
+  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Moderate to vigorous", "Global"), 3),
   kappa = c(
-    myround(kappa_AC_SED_6m[[5]], 2), myround(kappa_AC_MOD_6m[[5]], 2), myround(kappa_AC_VIG_6m[[5]], 2), myround(kappa_AC_glob_6m[[5]], 2),
-    myround(kappa_ENMO_SED_6m[[5]], 2), myround(kappa_ENMO_MOD_6m[[5]], 2), myround(kappa_ENMO_VIG_6m[[5]], 2), myround(kappa_ENMO_glob_6m[[5]], 2),
-    myround(kappa_MAD_SED_6m[[5]], 2), myround(kappa_MAD_MOD_6m[[5]], 2), myround(kappa_MAD_VIG_6m[[5]], 2), myround(kappa_MAD_glob_6m[[5]], 2)
+    myround(kappa_AC_SED_6m[[5]], 2), myround(kappa_AC_MOD_6m[[5]], 2), myround(kappa_AC_VIG_6m[[5]], 2), myround(kappa_AC_MVPA_6m[[5]], 2), myround(kappa_AC_glob_6m[[5]], 2),
+    myround(kappa_ENMO_SED_6m[[5]], 2), myround(kappa_ENMO_MOD_6m[[5]], 2), myround(kappa_ENMO_VIG_6m[[5]], 2), myround(kappa_ENMO_MVPA_6m[[5]], 2), myround(kappa_ENMO_glob_6m[[5]], 2),
+    myround(kappa_MAD_SED_6m[[5]], 2), myround(kappa_MAD_MOD_6m[[5]], 2), myround(kappa_MAD_VIG_6m[[5]], 2), myround(kappa_MAD_MVPA_6m[[5]], 2), myround(kappa_MAD_glob_6m[[5]], 2)
   ),
-  weight = rep(c(rep("unweighted", 3), "quadratic"), 3)
+  weight = rep(c(rep("unweighted", 4), "quadratic"), 3)
 )
 kable(kappa_6m, col.names = c("Accelerometer metric", "Intensity category", "Kappa", "Weight"), align = c("l", "l", "r", "l"))
 ```
@@ -242,14 +242,14 @@ kable(kappa_6m, col.names = c("Accelerometer metric", "Intensity category", "Kap
 
 ```{r kappa_12m}
 kappa_12m <- data.frame(
-  acc_metric = c(rep("AC", 4), rep("MAD", 4), rep("ENMO", 4)),
-  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Global"), 3),
+  acc_metric = c(rep("AC", 5), rep("MAD", 5), rep("ENMO", 5)),
+  intens_cat = rep(c("Sedentary", "Moderate", "Vigorous", "Moderate to vigorous", "Global"), 3),
   kappa = c(
-    myround(kappa_AC_SED_12m[[5]], 2), myround(kappa_AC_MOD_12m[[5]], 2), myround(kappa_AC_VIG_12m[[5]], 2), myround(kappa_AC_glob_12m[[5]], 2),
-    myround(kappa_ENMO_SED_12m[[5]], 2), myround(kappa_ENMO_MOD_12m[[5]], 2), myround(kappa_ENMO_VIG_12m[[5]], 2), myround(kappa_ENMO_glob_12m[[5]], 2),
-    myround(kappa_MAD_SED_12m[[5]], 2), myround(kappa_MAD_MOD_12m[[5]], 2), myround(kappa_MAD_VIG_12m[[5]], 2), myround(kappa_MAD_glob_12m[[5]], 2)
+    myround(kappa_AC_SED_12m[[5]], 2), myround(kappa_AC_MOD_12m[[5]], 2), myround(kappa_AC_VIG_12m[[5]], 2), myround(kappa_AC_MVPA_12m[[5]], 2), myround(kappa_AC_glob_12m[[5]], 2),
+    myround(kappa_ENMO_SED_12m[[5]], 2), myround(kappa_ENMO_MOD_12m[[5]], 2), myround(kappa_ENMO_VIG_12m[[5]], 2), myround(kappa_ENMO_MVPA_12m[[5]], 2), myround(kappa_ENMO_glob_12m[[5]], 2),
+    myround(kappa_MAD_SED_12m[[5]], 2), myround(kappa_MAD_MOD_12m[[5]], 2), myround(kappa_MAD_VIG_12m[[5]], 2), myround(kappa_MAD_MVPA_12m[[5]], 2), myround(kappa_MAD_glob_12m[[5]], 2)
   ),
-  weight = rep(c(rep("unweighted", 3), "quadratic"), 3)
+  weight = rep(c(rep("unweighted", 4), "quadratic"), 3)
 )
 kable(kappa_12m, col.names = c("Accelerometer metric", "Intensity category", "Kappa", "Weight"), align = c("l", "l", "r", "l"))
 ```
