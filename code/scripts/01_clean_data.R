@@ -37,8 +37,6 @@ database$ID <- str_c(
 # (2nd, 3rd, 4th)
 # 2 = participants who have been evaluated on the 3 eval (2nd, 3rd and 4th),
 # with training sessions attendance <= 50%
-# 3 = participants who have been evaluated on the 3 eval (2nd, 3rd and 4th),
-# no matter training sessions attendance
 sample <- 1
 if (sample == 1) {
   database <- database
@@ -48,17 +46,7 @@ if (sample == 1) {
       filter(
         database_ID %in% c(20, 21, 28, 30, 34, 36, 43, 61, 72, 80)
       )
-  } else {
-    if (sample == 3) {
-      database <- database %>% 
-        filter(
-          database_ID %in% c(
-            20, 21, 22, 28, 29, 30, 34, 36, 38, 39, 43, 
-            46, 49, 54, 55, 61, 62, 63, 68, 72, 73, 80
-            )
-        )
-    }
-  }
+  } 
 }
 
 # Make cardio_data data frame ---------------------------------------------
@@ -78,7 +66,7 @@ cardio_data <- select(
   VO2_kg = "VO2/kg"
 ) %>% 
   mutate(speed = round(speed, 0)) %>% 
-  filter(speed != 8)
+  filter(speed != 8, speed != 7, speed != 2)
 
 cardio_data$elevation <- as.double(cardio_data$elevation)
 cardio_data$HR        <- as.double(cardio_data$HR)
