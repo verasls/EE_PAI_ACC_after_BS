@@ -7,6 +7,7 @@ get_classification_error <- function(df) {
   #
   # Returns:
   #   the data frame with a variable for each cut-point classification error
+  # (where "yes" means no error and "no" means error)
   
   df$cp_1m  <- NA
   df$cp_6m  <- NA
