@@ -66,7 +66,7 @@ CrossTable(
 )
 
 # 1m vs 12m
-ENMO_cp_1m_vs_12m <- class_error_AC_1m %>% 
+ENMO_cp_1m_vs_12m <- class_error_ENMO_1m %>% 
   filter(cut_point != "cp_6m")
 
 CrossTable(
@@ -99,7 +99,7 @@ CrossTable(
 )
 
 # 1m vs 12m
-MAD_cp_1m_vs_12m <- class_error_AC_1m %>% 
+MAD_cp_1m_vs_12m <- class_error_MAD_1m %>% 
   filter(cut_point != "cp_6m")
 
 CrossTable(
